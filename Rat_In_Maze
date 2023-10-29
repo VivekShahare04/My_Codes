@@ -1,0 +1,29 @@
+#### Its an maze problem where a given character run from grids in any direction ###
+
+package Backtracking;
+import java.util.*;
+public class Rat_In_Maze {
+   private static void path(int sr,int sc,int er,int ec,String s,boolean[][] deadblocks){  //function is declared
+    if(sr<0 || sc<0) return; //condition 1
+    if(sr>er || sc>ec)return; //condition 2
+    if(deadblocks[sr][sc]==true)return; //condition 3
+    if(sr==er && sc==ec){ //condition 4
+        System.out.println(s);
+        return;
+    }
+    deadblocks[sr][sc]=true;
+    path(sr, sc+1, er, ec, s+"F", deadblocks);//forward
+    path(sr+1, sc, er, ec, s+"D", deadblocks);//downward
+
+   }
+    public static void main(String[] args) {  //main method
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter number of rows:-");
+        int rows = input.nextInt();
+        System.out.println("Enter number of columns:-");
+        int cols = input.nextInt();
+        boolean[][] deadblocks = new boolean[rows][cols]; //2D-matrix is declared to have proper track of active block w.r.t dead blocks
+        path(0,0,rows-1,cols-1,"",deadblocks);
+    }
+    
+}
